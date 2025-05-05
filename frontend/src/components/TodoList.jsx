@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../api/config';
 import './TodoList.css';
 
 function TodoList() {
@@ -25,7 +25,7 @@ function TodoList() {
     }
 
     try {
-      const res = await axios.get('http://localhost:5000/api/todos', {
+      const res = await api.get('/api/todos', {
         headers: { Authorization: currentToken },
       });
       setTodos(res.data);
@@ -46,8 +46,8 @@ function TodoList() {
     }
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/api/todos',
+      const response = await api.post(
+        '/api/todos',
         { text },
         { 
           headers: { Authorization: currentToken },
@@ -77,8 +77,8 @@ function TodoList() {
     }
 
     try {
-      await axios.put(
-        `http://localhost:5000/api/todos/${id}`,
+      await api.put(
+        `/api/todos/${id}`,
         { completed: !completed },
         { headers: { Authorization: currentToken } }
       );
@@ -99,7 +99,7 @@ function TodoList() {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/api/todos/${id}`, {
+      await api.delete(`/api/todos/${id}`, {
         headers: { Authorization: currentToken },
       });
       await fetchTodos();
@@ -125,8 +125,8 @@ function TodoList() {
     }
 
     try {
-      const response = await axios.put(
-        `http://localhost:5000/api/todos/${id}`,
+      const response = await api.put(
+        `/api/todos/${id}`,
         { text: editText },
         { 
           headers: { Authorization: currentToken },
