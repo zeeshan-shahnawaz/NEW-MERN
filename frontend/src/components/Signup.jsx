@@ -15,9 +15,14 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/api/auth/signup', form);
-      navigate('/login');
+      const res = await api.post('/api/auth/signup', form);
+      if (res.status === 200 || res.status === 201) {
+        navigate('/login');
+      } else {
+        setError('Signup failed. Please try again.');
+      }
     } catch (err) {
+      console.error('Signup error:', err);
       setError(err.response?.data?.msg || err.response?.data?.error || 'Signup failed. Please try again.');
     }
   };

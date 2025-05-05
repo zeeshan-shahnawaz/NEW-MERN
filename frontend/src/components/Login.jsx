@@ -16,9 +16,14 @@ function Login() {
     e.preventDefault();
     try {
       const res = await api.post('/api/auth/login', form);
-      localStorage.setItem('token', res.data.token);
-      navigate('/todos');
+      if (res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        navigate('/todos');
+      } else {
+        setError('No token received from server');
+      }
     } catch (err) {
+      console.error('Login error:', err);
       setError(err.response?.data?.msg || err.response?.data?.error || 'Login failed. Please try again.');
     }
   };
