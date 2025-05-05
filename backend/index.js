@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
 });
 
 // MongoDB connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todoApp';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://khanshah:cultusAgz-622@cluster0.vsm0sxa.mongodb.net/todoApp?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
